@@ -65,7 +65,7 @@ export class RGznbot extends plugin {
 			return false;
 		}
         let random_ = parseInt(Math.random() * 99);
-        if (random_ >=98 || random_ <=0 || e.msg && e.msg?.indexOf("welm") >= 0 || !e.isGroup){
+        if (random_ >=98 || random_ <=0 || e.msg && e.msg?.indexOf(dhcmdstart) >= 0 || !e.isGroup){
         e.msg = e.msg.replace(dhcmdstart, "")
 		let sc_cs = fs.readFileSync('./resources/dhdata.txt', { encoding: 'utf-8' })
 		let sc_cs2 = sc_cs + "\n我:" + e.msg + "\n" + bot_name + ":"
@@ -90,7 +90,7 @@ export class RGznbot extends plugin {
 		.then(function (response) {
 		    console.log(response.data.choices[0]);
 		    e.reply(dhreplystart+response.data.choices[0].text, e.isGroup);
-		})          //如果不需要区分welm与其他ai插件的回复的话可以删掉 | "(由welm回答)"+ | 这一部分
+		})         
 		.catch(function (error) {
 		    console.log(error);
 		});
@@ -121,7 +121,7 @@ export class RGznbot extends plugin {
 		.then(function (respone) {
 		    console.log(respone.data.choices[0]);
 		    e.reply(wdreplystart+respone.data.choices[0].text, e.isGroup);
-		})          //如果不需要区分welm与其他ai插件的回复的话可以删掉 | "(welm提问)"+ | 这一部分
+		})          
 		.catch(function (error) {
 		    console.log(error);
         }
@@ -152,7 +152,7 @@ export class RGznbot extends plugin {
 		.then(function (respone) {
 		    console.log(respone.data.choices[0]);
 		    e.reply(xxreplystart+respone.data.choices[0].text, e.isGroup);
-		})          //如果不需要区分welm与其他ai插件的回复的话可以删掉 | "(welm提问)"+ | 这一部分
+		})        
 		.catch(function (error) {
 		    console.log(error);
         }
