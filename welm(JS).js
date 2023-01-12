@@ -1,4 +1,5 @@
-import plugin from '../../lib/plugins/plugin.js'
+import plugin from '../../../lib/plugins/plugin.js'
+import common from '../../../lib/common/common.js'
 import console from 'console'
 import axios from 'axios'
 import fs from 'node:fs'
