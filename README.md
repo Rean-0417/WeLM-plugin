@@ -4,26 +4,24 @@
 
 # 安装教程
 
-## 插件包版
+## 插件包版(推荐)
 ### 第一步
-在Yunzai-Bot根目录打开终端并输入
+在Yunzai-Bot根目录打开终端并输入   **_PS:如果不使用给出的命令安装插件包版可能会无法载入插件_**
 
 ```
 git clone -b master https://gitee.com/shuciqianye/yunzai-custom-dialogue-welm ./plugins/WeLM-plugin
 ```
 回车
 ### 第二步
-第一步需要在插件目录内config.yaml(config里的)改上你申请的token _去这个文档申请[WeLM申请文档](https://docs.qq.com/form/page/DUW1YVVJNbHpzV2No#/fill-detail)_ 
+对机器人私聊"#填写token xxx"（这个xxx是你的token-api） _如果没有去这个文档申请[WeLM申请文档](https://docs.qq.com/form/page/DUW1YVVJNbHpzV2No#/fill-detail)_ 
+![输入图片说明](resources/tianxieyanshi.jpg)
 ### 第三步
-_PS:这一步内所有txt均在welm-plugin/data内_
+_PS:txt在WeLM-plugin/data内_
 #### 个性问答
-需要在dhdata.txt内写入预设，预设内第1行输入给模型的提示信息，然后回车空一行，接下来写一段模拟的对话。强烈建议去看看去看那个dhdata.txt演示学习一下，如果再不理解可以到渔火的群蒙德幼儿园找一个叫"群傻逼时不时来问问题喵~"的人问一下。或者!!!如果你机器人也是纳西妲的话可以把"(JD自用演示)"直接删了放到插件目data直接开用(强烈建议自己研究下，我用的这个对话起来bug很多)
-#### 提问
-需要填写在data(插件目录)里的wddata.txt才能正常使用
-#### 续写
-需要填写在data(插件目录)里的xxdata.txt才能正常使用
+需要在dhdata.txt内写入预设，预设内第1行输入给模型的提示信息，然后回车空一行，接下来写一段模拟的对话。强烈建议去看看去看那个dhdata.txt演示学习一下，如果再不理解可以到渔火的群蒙德幼儿园找一个叫"群傻逼时不时来问问题喵~"的人问一下。或者!!!如果你机器人也是纳西妲的话可以把"(JD自用演示)"直接删了放到data直接开用(强烈建议自己研究下，我用的这个对话起来bug很多)
 
-## JS版(推荐(至少在重构未完成之前))
+## JS版(不推荐)
+ _**PS:版本比较旧**_
 ### 第一步
 在任意目录打开终端并输入
 
@@ -37,7 +35,7 @@ git clone -b js-version https://gitee.com/shuciqianye/yunzai-custom-dialogue-wel
 ### 第四步
 _PS:这一步的所有txt都是上一步移动的文件_
 #### 个性问答
-需要在dhdata.txt内写入预设，预设内第1行输入给模型的提示信息，然后回车空一行，接下来写一段模拟的对话。强烈建议去看看去看那个dhdata.txt演示学习一下，如果再不理解可以到渔火的群蒙德幼儿园找一个叫"群傻逼时不时来问问题喵~"的人问一下。或者!!!如果你机器人也是纳西妲的话可以把"(JD自用演示)"直接删了放到插件目data直接开用(强烈建议自己研究下，我用的这个对话起来bug很多)
+需要在dhdata.txt内写入预设，预设内第1行输入给模型的提示信息，然后回车空一行，接下来写一段模拟的对话。强烈建议去看看去看那个dhdata.txt演示学习一下，如果再不理解可以到渔火的群蒙德幼儿园找一个叫"群傻逼时不时来问问题喵~"的人问一下。或者!!!如果你机器人也是纳西妲的话可以把"(JD自用演示)"直接删了放到resources里直接开用(强烈建议自己研究下，我用的这个对话起来bug很多)
 #### 提问
 需要填写wddata.txt后才能正常使用
 #### 续写
@@ -47,17 +45,17 @@ _PS:这一步的所有txt都是上一步移动的文件_
 第一次使用可能会缺少依赖，三选一执行
 
 ```
-pnpm add axios console -w
+pnpm add axios console yaml -w
 ```
 这个可能会掉依赖，希望你不要中奖
 
 ```
-npm install axios console
+npm install axios console yaml
 ```
 这个可能连不上
 
 ```
-cnpm install axios console 
+cnpm install axios console yaml
 ```
 这个需要安装cnpm，命令是
 
@@ -88,3 +86,6 @@ npm install -g cnpm -registry=https://registry.npm.taobao.org
 # 效果
 巨久之前测试的，那时候无需100%触发指令，现在要，放这个单纯为了表扬一下WeLM和装个逼 :smirk: 
 ![](resources/biaoyangwelm.png)
+
+# 更新日志
+☞[点我前往查看](./UpdateLogs.md)
