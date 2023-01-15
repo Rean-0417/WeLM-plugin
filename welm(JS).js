@@ -51,7 +51,7 @@ export class RGznbot extends plugin {
                 },
                 {
                     reg: '(.*)',
-	                fnc: 'Msg',
+	                fnc: 'Duihua',
 	                log: false
                 },
 				{
@@ -66,7 +66,7 @@ export class RGznbot extends plugin {
         })
     }
     
-    async Msg(e) {
+    async Duihua(e) {
         	//判断一下不是合并消息，不然会报错
         	//下面这个random是随机回复群友的消息，这里的概率是1%，如果不想要的话可以把98改成100
         	//那个47行的welm是个人用来当做一个100%触发的命令前缀专门用来测试的，可以改成你喜欢的。记得把49行那两个/中间的welm改成你自己的前缀
@@ -105,67 +105,68 @@ export class RGznbot extends plugin {
 		});
     }}
  
-    async Wenti(e) {
-        e.msg = e.msg.replace(wdcmdstart, "")
-        let sc_cs = fs.readFileSync('./resources/wddata.txt', { encoding: 'utf-8' })
-		let sc_cs2 = sc_cs + "\n问题:" + e.msg + "\n" + "回答" + ":"
-        axios({
-	        method: 'post',
-	        url: 'https://welm.weixin.qq.com/v1/completions',
-	        headers: {
-		        "Content-Type": "application/json",
-		        "Authorization": API_token
-	        },
-	        data: {
-		        "prompt": sc_cs2,
-		        "model": model,
-		        "max_tokens": max_tokens,
-		        "temperature": temperature,
-		        "top_p": top_p,
-		        "top_k": top_k,
-		        "n": n,
-		        "stop": twstop,
-	        }
-        })
-		.then(function (respone) {
-		    console.log(respone.data.choices[0]);
-		    e.reply(wdreplystart+respone.data.choices[0].text, e.isGroup);
-		})          
-		.catch(function (error) {
-		    console.log(error);
-        }
-    )}
+	async Wenti(e) {
+		e.msg = e.msg.replace(wdcmdstart, "")
+		let sc_cs2 = "根据你所学知识回答" + "\n问题:" + e.msg + "\n" + "回答" + ":"
+		axios({
+			method: 'post',
+			url: 'https://welm.weixin.qq.com/v1/completions',
+			headers: {
+				"Content-Type": "application/json",
+				"Authorization": API_token
+			},
+			data: {
+				"prompt": sc_cs2,
+				"model": model,
+				"max_tokens": max_tokens,
+				"temperature": temperature,
+				"top_p": top_p,
+				"top_k": top_k,
+				"n": n,
+				"stop": twstop,
+			}
+		})
+			.then(function (response) {
+				logger.info('WeLM返回消息:' + response.data.choices[0].text)
+				e.reply(wdreplystart + response.data.choices[0].text, e.isGroup);
+			})          //如果不需要区分welm与其他ai插件的回复的话可以删掉 | "(welm提问)"+ | 这一部分
+			.catch(function (error) {
+				console.log(error);
+			}
+			)
+	}
 
 	async Xuxie(e) {
-        e.msg = e.msg.replace(xxcmdstart, "")
-        let sc_cs = fs.readFileSync('./resources/xxdata.txt', { encoding: 'utf-8' })
-		let sc_cs2 = sc_cs + e.msg
-        axios({
-	        method: 'post',
-	        url: 'https://welm.weixin.qq.com/v1/completions',
-	        headers: {
-		        "Content-Type": "application/json",
-		        "Authorization": API_token
-	        },
-	        data: {
-		        "prompt": sc_cs2,
-		        "model": model,
-		        "max_tokens": max_tokens_xx,
-		        "temperature": temperature,
-		        "top_p": top_p,
-		        "top_k": top_k,
-		        "n": n,
-		        "stop": stop,
-	        }
-        })
-		.then(function (respone) {
-		    console.log(respone.data.choices[0]);
-		    e.reply(xxreplystart+respone.data.choices[0].text, e.isGroup);
-		})        
-		.catch(function (error) {
-		    console.log(error);
-        }
-    )}
+		//如需配置插件请到本插件文件夹内config的config.yaml进行编辑
+		e.msg = e.msg.replace(xxcmdstart, "")
+		axios({
+			method: 'post',
+			url: 'https://welm.weixin.qq.com/v1/completions',
+			headers: {
+				"Content-Type": "application/json",
+				"Authorization": API_token
+			},
+			data: {
+				"prompt": e.msg,
+				"model": model,
+				"max_tokens": max_tokens_xx,
+				"temperature": temperature,
+				"top_p": top_p,
+				"top_k": top_k,
+				"n": n,
+				"stop": stop,
+			}
+		})
+			.then(function (response) {
+				logger.info('WeLM返回消息:' + response.data.choices[0].text);
+				e.reply(xxreplystart + response.data.choices[0].text, e.isGroup);
+			})          //如果不需要区分welm与其他ai插件的回复的话可以删掉 | "(welm提问)"+ | 这一部分
+			.catch(function (error) {
+				console.log(error);
+			}
+			)
+	}
+
 	async op(e) {
 let name = e.msg.replace(/#更改name/g, "").trim();
 let res = fs.readFileSync(`${_path}/plugins/WeLM-plugin/config/config.yaml`,"utf8")
